@@ -13,25 +13,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://aleariasr.com"),
+
   title: "Alejandro Arias Rojas | Software Developer",
+
   description:
     "Business Informatics student focused on backend systems, enterprise applications and cloud technologies.",
+
   openGraph: {
     title: "Alejandro Arias Rojas | Software Developer",
     description:
-      "Portfolio of Alejandro Arias Rojas, focused on backend systems, enterprise applications and cloud technologies.",
-    url: "https://aleariasr.com",
-    siteName: "Alejandro Arias Rojas",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Alejandro Arias Rojas Portfolio",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
+      "Portfolio of Alejandro Arias Rojas, focused on backend systems and cloud technologies.",
+    images: ["/og-image.png"],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-image.png"],
   },
 };
 

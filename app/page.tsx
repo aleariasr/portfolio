@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const navItems = [
   { label: "Home", href: "#home", id: "home" },
@@ -39,8 +39,37 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
   const [typedText, setTypedText] = useState("");
 
+  const isNavClickScrollingRef = useRef(false);
+  const navClickTimeoutRef = useRef<number | null>(null);
+
   const activeIndex = navItems.findIndex((item) => item.id === activeSection);
   const safeActiveIndex = activeIndex >= 0 ? activeIndex : 0;
+
+  const handleNavClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    item: (typeof navItems)[number],
+  ) => {
+    event.preventDefault();
+
+    const section = document.getElementById(item.id);
+
+    setActiveSection(item.id);
+    isNavClickScrollingRef.current = true;
+
+    if (navClickTimeoutRef.current) {
+      window.clearTimeout(navClickTimeoutRef.current);
+    }
+
+    section?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+
+    navClickTimeoutRef.current = window.setTimeout(() => {
+      isNavClickScrollingRef.current = false;
+      setActiveSection(item.id);
+    }, 750);
+  };
 
   useEffect(() => {
     let index = 0;
@@ -61,6 +90,8 @@ export default function Home() {
 
   useEffect(() => {
     const updateActiveSection = () => {
+      if (isNavClickScrollingRef.current) return;
+
       const marker = window.scrollY + window.innerHeight * 0.35;
 
       let currentSection = "home";
@@ -84,6 +115,10 @@ export default function Home() {
     return () => {
       window.removeEventListener("scroll", updateActiveSection);
       window.removeEventListener("resize", updateActiveSection);
+
+      if (navClickTimeoutRef.current) {
+        window.clearTimeout(navClickTimeoutRef.current);
+      }
     };
   }, []);
 
@@ -91,7 +126,11 @@ export default function Home() {
     <main className="bg-white pb-24 text-zinc-950 sm:pb-0">
       <header className="fixed left-0 right-0 top-4 z-50 hidden px-4 sm:block">
         <nav className="fade-in mx-auto flex max-w-5xl items-center justify-between rounded-full border border-zinc-200 bg-white/85 px-5 py-3 shadow-sm backdrop-blur">
-          <a href="#home" className="text-sm font-semibold">
+          <a
+            href="#home"
+            onClick={(event) => handleNavClick(event, navItems[0])}
+            className="text-sm font-semibold"
+          >
             Alejandro Arias
           </a>
 
@@ -108,7 +147,7 @@ export default function Home() {
                 <a
                   key={item.id}
                   href={item.href}
-                  onClick={() => setActiveSection(item.id)}
+                  onClick={(event) => handleNavClick(event, item)}
                   className={`relative z-10 flex h-9 w-24 items-center justify-center rounded-full transition-colors duration-300 ${
                     activeSection === item.id
                       ? "text-white"
@@ -133,7 +172,11 @@ export default function Home() {
 
       <header className="fixed left-0 right-0 top-4 z-50 px-4 sm:hidden">
         <nav className="fade-in mx-auto flex max-w-md items-center justify-between rounded-full border border-zinc-200 bg-white/90 px-4 py-3 shadow-sm backdrop-blur">
-          <a href="#home" className="text-sm font-semibold">
+          <a
+            href="#home"
+            onClick={(event) => handleNavClick(event, navItems[0])}
+            className="text-sm font-semibold"
+          >
             Alejandro Arias
           </a>
 
@@ -161,7 +204,7 @@ export default function Home() {
             <a
               key={item.id}
               href={item.href}
-              onClick={() => setActiveSection(item.id)}
+              onClick={(event) => handleNavClick(event, item)}
               className={`relative z-10 rounded-full px-2 py-3 text-center transition-colors duration-300 ${
                 activeSection === item.id ? "text-white" : "text-zinc-600"
               }`}
@@ -241,6 +284,7 @@ export default function Home() {
             <div className="fade-up-delay-3 flex flex-col gap-3 pt-5 sm:flex-row sm:justify-center sm:pt-6">
               <a
                 href="#work"
+                onClick={(event) => handleNavClick(event, navItems[1])}
                 className="rounded-full bg-black px-6 py-3 text-center text-white transition hover:bg-zinc-800"
               >
                 View My Work
@@ -287,21 +331,27 @@ export default function Home() {
                 </h3>
               </div>
 
-              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap md:min-w-fit">
                 <a
                   href="#case-joyeria"
-                  className="rounded-full border border-zinc-300 px-5 py-2 text-center text-sm transition hover:border-zinc-500 hover:bg-white"
+                  className="group rounded-full bg-black px-6 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-zinc-950/15 transition duration-300 hover:-translate-y-0.5 hover:bg-zinc-800 hover:shadow-xl hover:shadow-zinc-950/20"
                 >
                   Case Study
+                  <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
                 </a>
 
                 <a
                   href="https://github.com/aleariasr/joyeria"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-black px-5 py-2 text-center text-sm text-white transition hover:bg-zinc-800"
+                  className="group rounded-full border border-zinc-300 bg-white px-6 py-3 text-center text-sm font-semibold text-zinc-950 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-zinc-950 hover:shadow-md"
                 >
                   View GitHub
+                  <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">
+                    ↗
+                  </span>
                 </a>
               </div>
             </div>
