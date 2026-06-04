@@ -15,21 +15,60 @@ const geistMono = Geist_Mono({
 export const metadata = {
   metadataBase: new URL("https://aleariasr.com"),
 
-  title: "Alejandro Arias Rojas | Software Developer",
+  title: {
+    default: "Alejandro Arias Rojas | Software Developer",
+    template: "%s | Alejandro Arias Rojas",
+  },
 
   description:
-    "Business Informatics student focused on backend systems, enterprise applications and cloud technologies.",
+    "Portfolio of Alejandro Arias Rojas, Business Informatics student and software developer focused on Django, React, Java, backend systems, enterprise applications and cloud technologies.",
+
+  keywords: [
+    "Alejandro Arias Rojas",
+    "Alejandro Arias",
+    "Software Developer",
+    "Business Informatics",
+    "Django",
+    "React",
+    "Java",
+    "Spring Boot",
+    "Backend Developer",
+    "Cloud Technologies",
+    "Enterprise Applications",
+    "Costa Rica",
+  ],
+
+  authors: [{ name: "Alejandro Arias Rojas" }],
+  creator: "Alejandro Arias Rojas",
 
   openGraph: {
     title: "Alejandro Arias Rojas | Software Developer",
     description:
-      "Portfolio of Alejandro Arias Rojas, focused on backend systems and cloud technologies.",
-    images: ["/og-image.png"],
+      "Portfolio of Alejandro Arias Rojas, software developer focused on Django, React, Java, backend systems, enterprise applications and cloud technologies.",
+    url: "https://aleariasr.com",
+    siteName: "Alejandro Arias Rojas Portfolio",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Alejandro Arias Rojas Portfolio",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
+    title: "Alejandro Arias Rojas | Software Developer",
+    description:
+      "Portfolio of Alejandro Arias Rojas, focused on backend systems, enterprise applications and cloud technologies.",
     images: ["/og-image.png"],
+  },
+
+  alternates: {
+    canonical: "https://aleariasr.com",
   },
 };
 
