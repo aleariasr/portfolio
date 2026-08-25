@@ -86,14 +86,74 @@ const licsScreens = [
   },
 ];
 
+const joyeriaScreens = [
+  {
+    src: "/projects/pos-ventas.png",
+    alt: "Joyería point-of-sale screen",
+    caption: "Point of sale",
+  },
+  {
+    src: "/projects/storefront-home.png",
+    alt: "Joyería public storefront home page",
+    caption: "Public storefront",
+  },
+  {
+    src: "/projects/storefront-producto.png",
+    alt: "Joyería storefront product page",
+    caption: "Product page",
+  },
+  {
+    src: "/projects/storefront-checkout.png",
+    alt: "Joyería storefront checkout flow",
+    caption: "Checkout",
+  },
+];
+
+const esteticaScreens = [
+  {
+    src: "/projects/dashboard-estetica.png",
+    alt: "EsteticaPro dashboard",
+    caption: "Dashboard",
+  },
+  {
+    src: "/projects/calendar-estetica.png",
+    alt: "EsteticaPro calendar view",
+    caption: "Calendar view",
+  },
+  {
+    src: "/projects/appointments-estetica.png",
+    alt: "EsteticaPro appointment booking screen",
+    caption: "Appointment booking",
+  },
+];
+
+const nexoScreens = [
+  {
+    src: "/projects/nexoacademico-dashboard.png",
+    alt: "NexoAcadémico dashboard",
+    caption: "Dashboard",
+  },
+  {
+    src: "/projects/nexoacademico-tasks.png",
+    alt: "NexoAcadémico task board",
+    caption: "Task board",
+  },
+  {
+    src: "/projects/nexoacademico-liquidglass.png",
+    alt: "NexoAcadémico liquid glass shader UI",
+    caption: "Liquid glass UI",
+  },
+];
+
 const teamProjects = [
   {
     label: "Team of 3 · IF-5100 Database Administration",
     title: "SIGAU",
     description:
-      "University academic-management database on Azure SQL Server: CIS-benchmark hardening, Row-Level Security, Dynamic Data Masking, auditing and a validated backup/restore strategy.",
+      "University academic-management database on Azure SQL Server, deployed and hardened on an Azure virtual machine: CIS-benchmark hardening, Row-Level Security, Dynamic Data Masking, auditing and a validated backup/restore strategy — fully documented.",
     image: "/projects/sigau-screenshot.png",
     technologies: ["Azure", "SQL Server", "Windows Server", "Security"],
+    github: "https://github.com/aleariasr/proyectoBD",
   },
   {
     label: "Team of 4 · IF5000 Networks",
@@ -102,6 +162,7 @@ const teamProjects = [
       "Deployed and hardened a multi-service Linux server: Docker workloads, a Tailscale VPN, Suricata IDS and Fail2ban with a real-time alerting pipeline and Prometheus/Grafana monitoring.",
     image: "/projects/if5000-screenshot.png",
     technologies: ["Docker", "Linux", "Suricata IDS", "Prometheus"],
+    github: "https://github.com/KendalTC/proyecto-if5000",
   },
   {
     label: "Team · IF4001 Operating Systems",
@@ -110,6 +171,7 @@ const teamProjects = [
       "Client-server remote administration tool in Python using raw TCP sockets, multithreading and a custom GUI for monitoring, screen capture and mouse control.",
     image: "/projects/tcpip.png",
     technologies: ["Python", "Sockets", "Threading", "CustomTkinter"],
+    github: "https://github.com/aleariasr/proyectoSistemasOperativos",
   },
 ];
 
@@ -353,10 +415,10 @@ export default function Home() {
             </h1>
 
             <p className="fade-up-delay-2 max-w-2xl text-lg leading-relaxed text-zinc-600 sm:mx-auto sm:text-xl">
-              I build software for real business operations, from retail
-              management systems to backend platforms and client-server
-              applications. Two of the systems below were sold as paid
-              freelance work and are in production for real companies today.
+              I build backend-heavy business systems that companies actually
+              run day to day — ERPs, POS platforms, scheduling and
+              academic-management software. Two of the systems below were
+              sold as freelance work and are live in production right now.
             </p>
 
             <div className="fade-up-delay-2 flex flex-wrap gap-2 sm:justify-center">
@@ -388,7 +450,7 @@ export default function Home() {
                   Building
                 </p>
                 <p className="mt-1 text-sm font-semibold sm:text-base">
-                  Enterprise
+                  ERPs &amp; POS
                 </p>
               </div>
 
@@ -403,7 +465,7 @@ export default function Home() {
             </div>
 
             <div className="fade-up-delay-3 flex flex-wrap gap-2 pt-3 sm:justify-center sm:gap-3 sm:pt-4">
-              {["Java", "Python", "Django", "React", "AWS"].map((skill) => (
+              {["Java", "Python", "Django", "React", "AWS", "Azure"].map((skill) => (
                 <span
                   key={skill}
                   className="rounded-full border px-3 py-2 text-xs sm:px-4 sm:text-sm"
@@ -445,8 +507,9 @@ export default function Home() {
           </h2>
 
           <p className="mt-5 text-base leading-relaxed text-zinc-600 sm:text-lg">
-            My strongest work is focused on business applications, operational
-            workflows and backend systems that solve practical problems.
+            The systems below run real operations — inventory that has to
+            reconcile, appointments that can&apos;t double-book, cash drawers
+            that have to close clean, records that have to survive an audit.
           </p>
         </div>
 
@@ -507,8 +570,9 @@ export default function Home() {
             <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_0.8fr]">
               <p className="text-base leading-relaxed text-zinc-600 sm:text-lg">
                 Offline-first enterprise resource planning system for a real
-                pharmaceutical injection laboratory: inventory, purchasing,
-                import costing, sales, customers, injector service tracking,
+                diesel and gasoline fuel-injector laboratory: inventory,
+                purchasing, import costing, sales, customers, injector service
+                tracking,
                 physical counts and reporting. Packaged as a native Windows
                 desktop app so the business can run with zero dependency on
                 internet access. Commissioned as a freelance engagement and
@@ -679,12 +743,13 @@ export default function Home() {
                   01 · Problem
                 </h4>
                 <p className="mt-2 max-w-3xl leading-relaxed text-zinc-600">
-                  Laboratorio de Inyección Castro Solís, a real pharmaceutical
-                  injection lab, was running on a legacy FoxPro/DBF system —
-                  tables named <code className="text-sm">INVEN01</code>{" "}
-                  through <code className="text-sm">INVEN08</code> — with no
-                  dedicated IT staff and unreliable internet. They hired me
-                  directly, as freelance work, to replace it with something a
+                  Laboratorio de Inyección Castro Solís, a real diesel and
+                  gasoline fuel-injector lab, was running on a legacy
+                  FoxPro/DBF system — tables named{" "}
+                  <code className="text-sm">INVEN01</code> through{" "}
+                  <code className="text-sm">INVEN08</code> — with no dedicated
+                  IT staff and unreliable internet. They hired me directly, as
+                  freelance work, to replace it with something a
                   non-technical operator could run fully offline, trust for
                   audit purposes, and restore themselves if something broke.
                 </p>
@@ -795,6 +860,12 @@ export default function Home() {
             <h3 className="mt-2 text-2xl font-bold sm:text-3xl">
               Jewelry Management Platform — Cuero&amp;Perla
             </h3>
+
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {joyeriaScreens.map((shot) => (
+                <ProjectImage key={shot.src} {...shot} />
+              ))}
+            </div>
 
             <div className="mt-6 space-y-6">
               <div>
@@ -913,6 +984,12 @@ export default function Home() {
             <h3 className="mt-2 text-2xl font-bold sm:text-3xl">
               EsteticaPro — Appointment Management SaaS
             </h3>
+
+            <div className="mt-6 grid grid-cols-3 gap-3">
+              {esteticaScreens.map((shot) => (
+                <ProjectImage key={shot.src} {...shot} />
+              ))}
+            </div>
 
             <div className="mt-6 space-y-6">
               <div>
@@ -1033,6 +1110,12 @@ export default function Home() {
             <h3 className="mt-2 text-2xl font-bold sm:text-3xl">
               NexoAcadémico
             </h3>
+
+            <div className="mt-6 grid grid-cols-3 gap-3">
+              {nexoScreens.map((shot) => (
+                <ProjectImage key={shot.src} {...shot} />
+              ))}
+            </div>
 
             <div className="mt-6 space-y-6">
               <div>
@@ -1191,31 +1274,35 @@ export default function Home() {
                   </span>
                 ))}
               </div>
+
+              {project.github ? (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-block rounded-full bg-black px-4 py-1.5 text-xs font-semibold text-white transition hover:bg-zinc-800"
+                >
+                  View GitHub
+                </a>
+              ) : null}
             </div>
           ))}
         </div>
       </section>
 
       <section id="about" className="mx-auto max-w-6xl px-5 py-20 sm:px-6 sm:py-28">
-        <div className="grid items-center gap-10 lg:grid-cols-1 lg:gap-12">
-          {/*
-            TODO: no photo asset was found at /public/profile.jpg — this was
-            rendering as a broken image on the live site, so the block is
-            removed for now. Drop a square photo at public/profile.jpg and
-            restore this block:
+        <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
+          <div className="relative mx-auto aspect-square w-full max-w-xs overflow-hidden rounded-[1.5rem] border bg-zinc-100 shadow-sm sm:max-w-sm sm:rounded-[2rem]">
+            <Image
+              src="/profile.jpg"
+              alt="Alejandro Arias Rojas"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 80vw, 380px"
+            />
+          </div>
 
-            <div className="relative mx-auto aspect-square w-full max-w-xs overflow-hidden rounded-[1.5rem] border bg-zinc-100 shadow-sm sm:max-w-sm sm:rounded-[2rem]">
-              <Image
-                src="/profile.jpg"
-                alt="Alejandro Arias Rojas"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 80vw, 380px"
-              />
-            </div>
-          */}
-
-          <div className="max-w-2xl">
+          <div>
             <p className="mb-3 text-xs uppercase tracking-[0.2em] text-zinc-500 sm:text-sm">
               About Me
             </p>
@@ -1227,16 +1314,24 @@ export default function Home() {
             <div className="mt-6 space-y-5 text-base leading-relaxed text-zinc-600 sm:text-lg">
               <p>
                 I build production-grade business systems: an offline-first
-                ERP running 372 automated tests, a POS and e-commerce
-                platform live for a real retailer, and SaaS-oriented
+                ERP running 372 automated tests for a real diesel and
+                gasoline fuel-injector lab, a POS and e-commerce platform
+                live for a real jewelry retailer, and SaaS-oriented
                 applications designed to be sold, not just demoed.
               </p>
 
               <p>
                 My work combines software engineering with business process
                 thinking — I&apos;m finishing a Bachelor&apos;s in Business
-                Informatics at Universidad de Costa Rica (2027), which is
-                where that process-first perspective comes from.
+                Informatics at Universidad de Costa Rica (2027).
+              </p>
+
+              <p>
+                Lately I&apos;ve been going deeper on Azure: SIGAU, one of my
+                database projects, runs on Azure SQL Server with Row-Level
+                Security and Dynamic Data Masking, and I&apos;m currently
+                preparing for the AI-200 (Azure AI Cloud Developer Associate)
+                certification.
               </p>
 
               <p>
