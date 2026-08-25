@@ -18,12 +18,12 @@ export const metadata = {
   title: "Alejandro Arias Rojas | Software Developer",
 
   description:
-    "Business Informatics student focused on backend systems, enterprise applications and cloud technologies.",
+    "Software developer building production-grade business systems — offline ERPs, POS platforms and SaaS applications with real deployments, not classroom exercises.",
 
   openGraph: {
     title: "Alejandro Arias Rojas | Software Developer",
     description:
-      "Portfolio of Alejandro Arias Rojas, focused on backend systems and cloud technologies.",
+      "Software developer building production-grade business systems — offline ERPs, POS platforms and SaaS applications with real deployments, not classroom exercises.",
     images: ["/og-image.png"],
   },
 
