@@ -12,7 +12,7 @@ import { ChallengesSection } from "@/components/projects/ChallengesSection";
 import { ResultsSection } from "@/components/projects/ResultsSection";
 import { ProjectPager } from "@/components/projects/ProjectPager";
 import { getAdjacentProjects, getProjectBySlug, projects } from "@/content/projects";
-import { routes } from "@/content/site";
+import { routes, site } from "@/content/site";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -38,9 +38,25 @@ export default async function ProjectDetailPage(props: PageProps<"/proyectos/[sl
 
   const { previous, next } = getAdjacentProjects(slug);
 
+  const projectJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: project.title,
+    description: project.oneLiner,
+    applicationCategory: "BusinessApplication",
+    author: { "@type": "Person", name: site.name, url: site.domain },
+    url: `${site.domain}${routes.projectDetail(project.slug)}`,
+    ...(project.links.live ? { sameAs: [project.links.live] } : {}),
+  };
+
   return (
     <>
       <Nav />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd) }}
+      />
 
       <main className="bg-background pb-24 pt-28 text-foreground lg:pb-16">
         <div className="mx-auto max-w-7xl px-5 sm:px-6">

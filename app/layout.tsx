@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
+import { site } from "@/content/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -77,6 +78,20 @@ export const metadata: Metadata = {
   },
 };
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  jobTitle: site.role,
+  url: site.domain,
+  email: `mailto:${site.email.primary}`,
+  sameAs: [site.social.github, site.social.linkedin],
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "CR",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -93,6 +108,10 @@ export default function RootLayout({
           id="theme-init"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
