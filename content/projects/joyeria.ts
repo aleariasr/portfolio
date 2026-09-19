@@ -13,6 +13,7 @@ export const joyeria: Project = {
   featured: true,
   links: {
     live: "https://cueroyperla.com",
+    repo: "https://github.com/aleariasr/joyeria",
   },
   heroImage: {
     src: "/projects/joyeria/pos-ventas.png",
