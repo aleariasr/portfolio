@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { ProjectCard } from "./ProjectCard";
 import type { Project, ProjectType } from "@/content/types/project";
@@ -14,6 +14,30 @@ const typeFilters: { value: TypeFilter; label: string }[] = [
   { value: "academico", label: "Academic" },
 ];
 
+/**
+ * Grouped so the filter bar stays short — each group matches any of its
+ * underlying technologies from content/projects/*.ts. Adding a project
+ * with a new technology just needs a spot in one of these groups (or a
+ * new one), not a change to every project's tag list.
+ */
+const techGroups: { label: string; matches: string[] }[] = [
+  { label: "Django", matches: ["Django", "Django REST Framework"] },
+  { label: "React / Next.js", matches: ["React", "Next.js"] },
+  { label: "Node.js", matches: ["Node.js", "Express"] },
+  { label: "Python", matches: ["Python", "Celery", "Sockets", "Threading", "customtkinter"] },
+  { label: "TypeScript", matches: ["TypeScript"] },
+  {
+    label: "Databases",
+    matches: ["PostgreSQL", "MySQL", "SQL Server", "Supabase", "Redis", "T-SQL"],
+  },
+  { label: "Cloud (AWS / Azure)", matches: ["AWS Lambda", "Azure", "Vercel"] },
+  { label: "Docker & Infra", matches: ["Docker", "Electron", "Nginx", "Windows Server", "Linux"] },
+  {
+    label: "Security & Networking",
+    matches: ["Suricata", "Fail2ban", "Tailscale", "Prometheus", "Grafana"],
+  },
+];
+
 const activePill = "bg-accent text-accent-foreground";
 const inactivePill = "border border-border bg-surface text-foreground hover:border-foreground/40";
 
@@ -23,25 +47,22 @@ interface ProjectsExplorerProps {
 
 export function ProjectsExplorer({ projects }: ProjectsExplorerProps) {
   const [typeFilter, setTypeFilter] = useState<TypeFilter>("all");
-  const [selectedTechs, setSelectedTechs] = useState<string[]>([]);
+  const [selectedGroups, setSelectedGroups] = useState<string[]>([]);
 
-  const allTechs = useMemo(() => {
-    const set = new Set<string>();
-    projects.forEach((project) => project.technologies.forEach((tech) => set.add(tech)));
-    return Array.from(set).sort();
-  }, [projects]);
-
-  function toggleTech(tech: string) {
-    setSelectedTechs((current) =>
-      current.includes(tech) ? current.filter((item) => item !== tech) : [...current, tech],
+  function toggleGroup(label: string) {
+    setSelectedGroups((current) =>
+      current.includes(label) ? current.filter((item) => item !== label) : [...current, label],
     );
   }
 
   const filtered = projects.filter((project) => {
     const matchesType = typeFilter === "all" || project.type === typeFilter;
     const matchesTech =
-      selectedTechs.length === 0 ||
-      selectedTechs.some((tech) => project.technologies.includes(tech));
+      selectedGroups.length === 0 ||
+      selectedGroups.some((label) => {
+        const group = techGroups.find((item) => item.label === label);
+        return group?.matches.some((tech) => project.technologies.includes(tech));
+      });
     return matchesType && matchesTech;
   });
 
@@ -70,17 +91,17 @@ export function ProjectsExplorer({ projects }: ProjectsExplorerProps) {
       </div>
 
       <div className="mb-12 flex flex-wrap gap-2">
-        {allTechs.map((tech) => (
+        {techGroups.map((group) => (
           <button
-            key={tech}
+            key={group.label}
             type="button"
-            onClick={() => toggleTech(tech)}
-            aria-pressed={selectedTechs.includes(tech)}
+            onClick={() => toggleGroup(group.label)}
+            aria-pressed={selectedGroups.includes(group.label)}
             className={`rounded-full px-3 py-1.5 text-xs font-medium transition ${
-              selectedTechs.includes(tech) ? activePill : inactivePill
+              selectedGroups.includes(group.label) ? activePill : inactivePill
             }`}
           >
-            {tech}
+            {group.label}
           </button>
         ))}
       </div>

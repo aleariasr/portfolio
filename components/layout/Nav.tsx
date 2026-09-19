@@ -5,8 +5,6 @@ import { usePathname } from "next/navigation";
 import { routes, site } from "@/content/site";
 import { useDictionary } from "@/lib/i18n/locale-store";
 import { LinkButton } from "@/components/ui/LinkButton";
-import { ThemeToggle } from "./ThemeToggle";
-import { LanguageSwitcher } from "./LanguageSwitcher";
 
 const navItems = [
   { key: "home", href: routes.home },
@@ -55,9 +53,6 @@ export function Nav() {
               ))}
             </div>
 
-            <ThemeToggle />
-            <LanguageSwitcher />
-
             <LinkButton href={site.cvUrl} download size="sm">
               {dict.nav.resume}
             </LinkButton>
@@ -71,10 +66,9 @@ export function Nav() {
             {site.name}
           </Link>
 
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <LanguageSwitcher />
-          </div>
+          <LinkButton href={site.cvUrl} download size="sm">
+            {dict.nav.resume}
+          </LinkButton>
         </nav>
       </header>
 

@@ -4,11 +4,7 @@ import { workingProcess } from "@/content/services";
 export function ProcessSection() {
   return (
     <Section id="process" width="default">
-      <SectionHeading
-        eyebrow="How I Work"
-        title="A process built around real data, not assumptions."
-        align="center"
-      />
+      <SectionHeading eyebrow="Process" title="How I work" align="center" />
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {workingProcess.map((step, index) => (

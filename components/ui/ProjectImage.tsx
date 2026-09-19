@@ -11,7 +11,7 @@ interface ProjectImageProps {
   className?: string;
 }
 
-export function ProjectImage({ src, alt, caption, fit = "cover", className = "" }: ProjectImageProps) {
+export function ProjectImage({ src, alt, caption, fit = "contain", className = "" }: ProjectImageProps) {
   const [failed, setFailed] = useState(false);
 
   return (
@@ -24,13 +24,13 @@ export function ProjectImage({ src, alt, caption, fit = "cover", className = "" 
         </div>
       ) : (
         <div
-          className={`relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-border bg-surface ${className}`}
+          className={`relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-border bg-muted ${className}`}
         >
           <Image
             src={src}
             alt={alt}
             fill
-            className={fit === "contain" ? "object-contain" : "object-cover"}
+            className={fit === "cover" ? "object-cover" : "object-contain p-2"}
             sizes="(max-width: 768px) 100vw, 33vw"
             onError={() => setFailed(true)}
           />

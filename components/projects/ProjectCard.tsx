@@ -1,5 +1,6 @@
-import { LinkButton } from "@/components/ui/LinkButton";
+import Link from "next/link";
 import { ProjectImage } from "@/components/ui/ProjectImage";
+import { buttonClasses } from "@/components/ui/button-styles";
 import { routes } from "@/content/site";
 import type { Project, ProjectType } from "@/content/types/project";
 
@@ -15,7 +16,10 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article className="overflow-hidden rounded-[1.5rem] border border-border bg-surface transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:rounded-[2rem]">
+    <Link
+      href={routes.projectDetail(project.slug)}
+      className="group block overflow-hidden rounded-[1.5rem] border border-border bg-surface transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:rounded-[2rem]"
+    >
       <div className="p-3 sm:p-4">
         <ProjectImage src={project.heroImage.src} alt={project.heroImage.alt} />
       </div>
@@ -48,11 +52,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         <div className="mt-8">
-          <LinkButton href={routes.projectDetail(project.slug)} variant="secondary" size="sm">
+          <span className={buttonClasses("primary", "sm")}>
             Case study
-          </LinkButton>
+            <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </span>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }

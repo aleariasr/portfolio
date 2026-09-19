@@ -15,8 +15,8 @@ export const lics: Project = {
     repo: "https://github.com/aleariasr/laboratorio-inyeccion-castro-solis",
   },
   heroImage: {
-    src: "/projects/lics/architecture.png",
-    alt: "LICS deployment architecture: Electron desktop app, Nginx, Next.js and Django REST Framework, PostgreSQL",
+    src: "/projects/lics/dashboard.png",
+    alt: "LICS main dashboard",
   },
   gallery: [
     { src: "/projects/lics/login.png", alt: "LICS login screen", caption: "Login" },

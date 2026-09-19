@@ -3,12 +3,10 @@ import Image from "next/image";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { Section, SectionHeading } from "@/components/ui/Section";
-import { Card } from "@/components/ui/Card";
-import { Pill } from "@/components/ui/Pill";
 import { LinkButton } from "@/components/ui/LinkButton";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { projects } from "@/content/projects";
-import { bio, certifications, education, languages } from "@/content/about";
+import { bio } from "@/content/about";
 import { routes, site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -85,46 +83,6 @@ export default function AboutPage() {
             {academicProjects.map((project) => (
               <ProjectCard key={project.slug} project={project} />
             ))}
-          </div>
-        </Section>
-
-        <Section width="default" className="pt-0">
-          <div className="grid gap-6 sm:grid-cols-3">
-            <Card padding="sm">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                Education
-              </p>
-              <p className="mt-3 text-base font-bold">{education.institution}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{education.degree}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{education.dateRange}</p>
-            </Card>
-
-            <Card padding="sm">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                Certifications
-              </p>
-              {certifications.map((cert) => (
-                <div key={cert.name} className="mt-3">
-                  <p className="text-sm font-semibold">{cert.name}</p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {cert.status === "in-progress" ? "In progress" : "Completed"}
-                  </p>
-                </div>
-              ))}
-            </Card>
-
-            <Card padding="sm">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                Languages
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {languages.map((language) => (
-                  <Pill key={language.name}>
-                    {language.name} · {language.level}
-                  </Pill>
-                ))}
-              </div>
-            </Card>
           </div>
         </Section>
       </main>

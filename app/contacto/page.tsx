@@ -25,29 +25,12 @@ export default function ContactPage() {
             align="center"
           />
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Card padding="sm">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                Primary
-              </p>
-              <p className="mt-2 text-lg font-bold">{site.email.primary}</p>
-              <div className="mt-4">
-                <LinkButton href={`mailto:${site.email.primary}`}>Send an email</LinkButton>
-              </div>
-            </Card>
-
-            <Card padding="sm">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                Alternate
-              </p>
-              <p className="mt-2 text-lg font-bold">{site.email.secondary}</p>
-              <div className="mt-4">
-                <LinkButton href={`mailto:${site.email.secondary}`} variant="secondary">
-                  Send an email
-                </LinkButton>
-              </div>
-            </Card>
-          </div>
+          <Card padding="sm" className="mx-auto max-w-md">
+            <p className="text-lg font-bold">{site.email.primary}</p>
+            <div className="mt-4">
+              <LinkButton href={`mailto:${site.email.primary}`}>Send an email</LinkButton>
+            </div>
+          </Card>
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <LinkButton href={site.social.github} variant="secondary">
