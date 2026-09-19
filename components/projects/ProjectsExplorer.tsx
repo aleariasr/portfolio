@@ -69,6 +69,7 @@ export function ProjectsExplorer({ projects }: ProjectsExplorerProps) {
   return (
     <Section>
       <SectionHeading
+        level={1}
         eyebrow="All Projects"
         title="Client work, independent builds and coursework."
         description="Filter by who it was for, or by the stack that matters to you."
@@ -110,8 +111,13 @@ export function ProjectsExplorer({ projects }: ProjectsExplorerProps) {
         <p className="text-muted-foreground">No projects match those filters.</p>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+          {filtered.map((project, index) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              headingLevel={2}
+              priority={index === 0}
+            />
           ))}
         </div>
       )}

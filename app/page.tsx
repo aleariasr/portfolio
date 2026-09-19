@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <Nav />
 
-      <main className="bg-background pb-24 text-foreground lg:pb-0">
+      <main id="main-content" tabIndex={-1} className="bg-background pb-24 text-foreground lg:pb-0">
         <Hero />
         <ServicesSection />
         <FeaturedProjects />

@@ -15,7 +15,7 @@ export default function ProjectsPage() {
     <>
       <Nav />
 
-      <main className="bg-background pb-24 pt-16 text-foreground lg:pb-16">
+      <main id="main-content" tabIndex={-1} className="bg-background pb-24 pt-16 text-foreground lg:pb-16">
         <ProjectsExplorer projects={projects} />
       </main>
 

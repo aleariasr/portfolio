@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import { site } from "@/content/site";
+import { SkipLink } from "@/components/layout/SkipLink";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -114,7 +115,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SkipLink />
+        {children}
+      </body>
     </html>
   );
 }

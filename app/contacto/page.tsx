@@ -16,9 +16,10 @@ export default function ContactPage() {
     <>
       <Nav />
 
-      <main className="bg-background pb-24 pt-28 text-foreground lg:pb-16">
+      <main id="main-content" tabIndex={-1} className="bg-background pb-24 pt-28 text-foreground lg:pb-16">
         <Section width="narrow" className="pt-0 text-center">
           <SectionHeading
+            level={1}
             eyebrow="Contact"
             title="Tell me what you're building."
             description="Whether it's a system that needs replacing, a role you think I'd fit, or a question about one of the projects on this site — email is the fastest way to reach me."

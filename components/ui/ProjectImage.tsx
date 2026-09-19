@@ -9,9 +9,18 @@ interface ProjectImageProps {
   caption?: string;
   fit?: "cover" | "contain";
   className?: string;
+  /** Set on the first card of a grid so it isn't lazy-loaded when it's the LCP candidate. */
+  priority?: boolean;
 }
 
-export function ProjectImage({ src, alt, caption, fit = "contain", className = "" }: ProjectImageProps) {
+export function ProjectImage({
+  src,
+  alt,
+  caption,
+  fit = "contain",
+  className = "",
+  priority = false,
+}: ProjectImageProps) {
   const [failed, setFailed] = useState(false);
 
   return (
@@ -30,6 +39,7 @@ export function ProjectImage({ src, alt, caption, fit = "contain", className = "
             src={src}
             alt={alt}
             fill
+            priority={priority}
             className={fit === "cover" ? "object-cover" : "object-contain p-2"}
             sizes="(max-width: 768px) 100vw, 33vw"
             onError={() => setFailed(true)}

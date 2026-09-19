@@ -58,7 +58,7 @@ export default async function ProjectDetailPage(props: PageProps<"/proyectos/[sl
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd) }}
       />
 
-      <main className="bg-background pb-24 pt-28 text-foreground lg:pb-16">
+      <main id="main-content" tabIndex={-1} className="bg-background pb-24 pt-28 text-foreground lg:pb-16">
         <div className="mx-auto max-w-7xl px-5 sm:px-6">
           <Link href={routes.projects} className="text-sm text-muted-foreground hover:text-foreground">
             ← All projects

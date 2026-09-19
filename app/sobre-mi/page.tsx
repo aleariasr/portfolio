@@ -22,7 +22,7 @@ export default function AboutPage() {
     <>
       <Nav />
 
-      <main className="bg-background pb-24 pt-28 text-foreground lg:pb-16">
+      <main id="main-content" tabIndex={-1} className="bg-background pb-24 pt-28 text-foreground lg:pb-16">
         <Section width="default" className="pt-0">
           <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
             <div className="relative mx-auto aspect-square w-full max-w-xs overflow-hidden rounded-[1.5rem] border border-border bg-muted shadow-sm sm:max-w-sm sm:rounded-[2rem]">
@@ -67,8 +67,8 @@ export default function AboutPage() {
             description="Nov 2025 – Present. Freelance work for real clients, plus independent products built to the same standard."
           />
           <div className="grid gap-6 lg:grid-cols-3">
-            {professionalProjects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
+            {professionalProjects.map((project, index) => (
+              <ProjectCard key={project.slug} project={project} priority={index === 0} />
             ))}
           </div>
         </Section>

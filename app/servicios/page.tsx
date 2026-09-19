@@ -20,9 +20,10 @@ export default function ServicesPage() {
     <>
       <Nav />
 
-      <main className="bg-background pb-24 pt-28 text-foreground lg:pb-16">
+      <main id="main-content" tabIndex={-1} className="bg-background pb-24 pt-28 text-foreground lg:pb-16">
         <Section className="pt-0">
           <SectionHeading
+            level={1}
             eyebrow="Services"
             title="Software built around how your business actually runs."
             description="Not templates. Every service below is backed by a system I designed, built and still support for a real client — see the proof, not just the promise."

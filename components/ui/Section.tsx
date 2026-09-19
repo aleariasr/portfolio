@@ -29,6 +29,8 @@ interface SectionHeadingProps {
   title: string;
   description?: string;
   align?: "left" | "center";
+  /** Use 1 when this is the page's main heading (a page must have exactly one h1). */
+  level?: 1 | 2;
   children?: ReactNode;
 }
 
@@ -37,8 +39,11 @@ export function SectionHeading({
   title,
   description,
   align = "left",
+  level = 2,
   children,
 }: SectionHeadingProps) {
+  const HeadingTag = level === 1 ? "h1" : "h2";
+
   return (
     <div className={`mb-10 max-w-3xl sm:mb-14 ${align === "center" ? "mx-auto text-center" : ""}`}>
       {eyebrow ? (
@@ -46,7 +51,9 @@ export function SectionHeading({
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-6xl">{title}</h2>
+      <HeadingTag className="text-3xl font-bold tracking-tight sm:text-4xl md:text-6xl">
+        {title}
+      </HeadingTag>
       {description ? (
         <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
           {description}
