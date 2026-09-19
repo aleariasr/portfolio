@@ -1,6 +1,7 @@
 export type Theme = "light" | "dark";
 
 const STORAGE_KEY = "theme";
+const listeners = new Set<() => void>();
 
 export function getStoredTheme(): Theme | null {
   if (typeof window === "undefined") return null;
@@ -29,6 +30,33 @@ export function applyTheme(theme: Theme) {
 export function setStoredTheme(theme: Theme) {
   window.localStorage.setItem(STORAGE_KEY, theme);
   applyTheme(theme);
+  listeners.forEach((listener) => listener());
+}
+
+/**
+ * useSyncExternalStore plumbing so ThemeToggle can read the active theme
+ * without a setState-in-effect (also picks up changes made in other tabs).
+ */
+export function subscribeToTheme(onChange: () => void) {
+  listeners.add(onChange);
+
+  const onStorage = (event: StorageEvent) => {
+    if (event.key === STORAGE_KEY) onChange();
+  };
+  window.addEventListener("storage", onStorage);
+
+  return () => {
+    listeners.delete(onChange);
+    window.removeEventListener("storage", onStorage);
+  };
+}
+
+export function getThemeSnapshot(): Theme {
+  return getActiveTheme();
+}
+
+export function getThemeServerSnapshot(): Theme {
+  return "light";
 }
 
 // Inlined into a beforeInteractive <Script> in app/layout.tsx to avoid a
