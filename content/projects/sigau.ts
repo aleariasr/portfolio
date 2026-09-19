@@ -42,6 +42,10 @@ export const sigau: Project = {
   architecture: {
     overview:
       "A simulated LUN layout across four Azure VM data disks (data files and the memory-optimized filegroup, transaction log, tempdb, and backups/audit, each on its own drive), five filegroups, and FULL recovery model.",
+    diagram: {
+      src: "/projects/sigau/diagrama-bd.png",
+      alt: "SIGAU entity-relationship diagram across the core, academico, admin, seguridad and api schemas",
+    },
     decisions: [
       {
         decision: "Physical storage separated across drives to simulate a real LUN layout.",

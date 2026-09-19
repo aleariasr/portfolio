@@ -28,8 +28,8 @@ export const lics: Project = {
     },
     {
       src: "/projects/lics/sale.png",
-      alt: "LICS sale creation and confirmation screen",
-      caption: "Sale creation",
+      alt: "LICS confirmed sale detail, with invoice download and cancellation",
+      caption: "Sale detail",
     },
     {
       src: "/projects/lics/purchase-costs.png",
