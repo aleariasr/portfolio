@@ -13,7 +13,9 @@ interface SectionProps extends HTMLAttributes<HTMLElement> {
 }
 
 export function Section({ width = "wide", className, children, ...props }: SectionProps) {
-  const sectionClasses = ["px-5 py-20 sm:px-6 sm:py-28", className].filter(Boolean).join(" ");
+  const sectionClasses = ["scroll-mt-24 px-5 py-20 sm:px-6 sm:py-28", className]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <section className={sectionClasses} {...props}>
