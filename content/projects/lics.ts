@@ -71,6 +71,10 @@ export const lics: Project = {
   architecture: {
     overview:
       "Docker Compose stack (Django REST Framework, PostgreSQL, Next.js, Nginx) running inside WSL2 on the client's own Windows machine, wrapped in an Electron shell so it looks and feels like a normal desktop application.",
+    diagram: {
+      src: "/projects/lics/architecture.png",
+      alt: "LICS deployment architecture: Electron desktop app, Nginx, Next.js and Django REST Framework, PostgreSQL",
+    },
     decisions: [
       {
         decision: "Stock is never a stored, editable field — only movements.",
